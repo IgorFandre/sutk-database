@@ -84,13 +84,15 @@
 
 **addresses (адреса):**
    - `address`: обязательное поле
+   - `from_date`: по умолчанию CURRENT_TIME
+   - `to_date`: по умолчанию 5999 год.
 
 **orders (заказы):**
    - `delivery`: флаг доставки, обязательное поле
-   - `order_date`: дата заказа, по умолчанию ставится текущее время
+   - `order_date`: дата заказа, по умолчанию CURRENT_DATE
 
 **steps (шаги):**
-   - `step_combination`: уникальный ключ для комбинации `(worker_id, order_id, step_id)`.
+   - `step_combination`: уникальный ключ для комбинации `(worker_id, order_id, step_id)`
 
 **products (продукты):**
    - `name`: обязательное поле
@@ -100,5 +102,5 @@
 
 **ordered_products (заказанные продукты):**
    - `count`: целочисленное поле, должно быть больше неотрицательным
-   - `order_combination`: уникальный ключ для комбинации `(order_id, product_id)`.
+   - `order_combination`: уникальный ключ для комбинации `(order_id, product_id)`
 
