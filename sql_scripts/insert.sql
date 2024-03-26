@@ -29,7 +29,7 @@ VALUES
     (4, 'Алексей', 'Григорьев', 'Евгеньевич'),
     (5, 'Марина', 'Давыдова', 'Ильинична');
 
-INSERT INTO sutk.clients (worker_id, company, contact_name, phone)
+INSERT INTO sutk.clients (worker_id, company, contact_name, contact_phone)
 VALUES
     (2, 'Компания ABC', 'Иван Иванов', '+7(111)222-33-44'),
     (2, 'OOO "XYZ"', 'Елена Смирнова', '+7(222)333-44-55'),

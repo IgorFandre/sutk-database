@@ -23,7 +23,7 @@ CREATE TABLE sutk.clients (
     worker_id INTEGER REFERENCES sutk.workers(id),
     company VARCHAR(50) UNIQUE,
     contact_name VARCHAR(65) NOT NULL,
-    phone CHAR(16) CHECK(phone LIKE '+7(___)___-__-__')
+    contact_phone CHAR(16) CHECK(phone LIKE '+7(___)___-__-__')
 );
 
 DROP TABLE IF EXISTS sutk.addresses CASCADE;
