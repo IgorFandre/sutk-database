@@ -55,34 +55,37 @@ INSERT INTO sutk.addresses (client_id, address, from_date, to_date)
 VALUES
     (1, 'First Address for User 1', '2024-03-25 10:00:00', '2024-03-26 15:30:00'),
     (1, 'Second Address for User 1', '2024-03-26 15:30:00', '2024-03-27 09:45:00'),
-    (1, 'Third Address for User 1', '2024-03-27 09:45:00', NULL),
     (3, 'First Address for User 3', '2024-03-25 08:00:00', '2024-03-26 11:45:00'),
     (3, 'Second Address for User 3', '2024-03-26 11:45:00', '2024-03-30 14:20:00'),
-    (3, 'Third Address for User 3', '2024-03-30 14:20:00', NULL),
     (5, 'First Address for User 5', '2024-03-26 09:30:00', '2024-03-28 12:15:00'),
     (5, 'Second Address for User 5', '2024-03-28 12:15:00', '2024-04-02 16:40:00'),
-    (5, 'Third Address for User 5', '2024-04-02 16:40:00', NULL),
     (7, 'First Address for User 7', '2024-03-27 11:20:00', '2024-03-28 13:50:00'),
     (7, 'Second Address for User 7', '2024-03-28 13:50:00', '2024-04-05 17:10:00'),
-    (7, 'Third Address for User 7', '2024-04-05 17:10:00', NULL),
     (9, 'First Address for User 9', '2024-03-28 10:10:00', '2024-03-29 14:00:00'),
     (9, 'Second Address for User 9', '2024-03-29 14:00:00', '2024-04-03 16:45:00'),
-    (9, 'Third Address for User 9', '2024-04-03 16:45:00', NULL),
     (11, 'First Address for User 11', '2024-03-28 10:10:00', '2024-03-29 15:00:00'),
     (11, 'Second Address for User 11', '2024-03-29 14:00:00', '2024-04-03 17:45:00'),
-    (11, 'Third Address for User 11', '2024-04-03 16:45:00', NULL),
     (13, 'First Address for User 13', '2024-03-28 10:10:00', '2024-03-25 16:00:00'),
     (13, 'Second Address for User 13', '2024-03-29 14:00:00', '2024-04-03 18:45:00'),
-    (13, 'Third Address for User 13', '2024-04-03 16:45:00', NULL),
     (15, 'First Address for User 15', '2024-03-28 10:10:00', '2024-03-29 17:00:00'),
     (15, 'Second Address for User 15', '2024-03-29 14:00:00', '2024-04-03 19:45:00'),
-    (15, 'Third Address for User 15', '2024-04-03 16:45:00', NULL),
     (17, 'First Address for User 17', '2024-03-28 10:10:00', '2024-03-28 18:00:00'),
     (17, 'Second Address for User 17', '2024-03-29 14:00:00', '2024-04-03 20:45:00'),
-    (17, 'Third Address for User 17', '2024-04-03 16:45:00', NULL),
     (19, 'First Address for User 19', '2024-03-28 10:10:00', '2024-03-30 19:00:00'),
-    (19, 'Second Address for User 19', '2024-03-29 14:00:00', '2024-04-03 21:45:00'),
-    (19, 'Third Address for User 19', '2024-04-03 16:45:00', NULL);
+    (19, 'Second Address for User 19', '2024-03-29 14:00:00', '2024-04-03 21:45:00');
+
+INSERT INTO sutk.addresses (client_id, address, from_date)
+VALUES
+    (1, 'Third Address for User 1', '2024-03-27 09:45:00'),
+    (3, 'Third Address for User 3', '2024-03-30 14:20:00'),
+    (5, 'Third Address for User 5', '2024-04-02 16:40:00'),
+    (7, 'Third Address for User 7', '2024-04-05 17:10:00'),
+    (9, 'Third Address for User 9', '2024-04-03 16:45:00'),
+    (11, 'Third Address for User 11', '2024-04-03 16:45:00'),
+    (13, 'Third Address for User 13', '2024-04-03 16:45:00'),
+    (15, 'Third Address for User 15', '2024-04-03 16:45:00'),
+    (17, 'Third Address for User 17', '2024-04-03 16:45:00'),
+    (19, 'Third Address for User 19', '2024-04-03 16:45:00');
 
 INSERT INTO sutk.orders (client_id, description, delivery, order_date)
 VALUES
@@ -91,21 +94,21 @@ VALUES
     (1, 'Order 3 for User 1', TRUE, '2024-03-26 15:45:00'), -- Заказ на второй адрес
     (2, 'Order 1 for User 2', FALSE, '2024-03-26 12:00:00'),
     (2, 'Order 2 for User 2', FALSE, '2024-03-26 12:00:00'),
-    (2, 'Order 3 for User 2', FALSE, CURRENT_TIME),
-    (3, 'Order 1 for User 3', TRUE, CURRENT_TIME),
-    (3, 'Order 2 for User 3', TRUE, CURRENT_TIME),
-    (3, 'Order 3 for User 3', FALSE, CURRENT_TIME),
-    (4, 'Order 1 for User 4', FALSE, CURRENT_TIME),
-    (4, 'Order 2 for User 4', FALSE, CURRENT_TIME),
-    (4, 'Order 3 for User 4', FALSE, CURRENT_TIME),
-    (5, 'Order 1 for User 5', TRUE, CURRENT_TIME),
-    (5, 'Order 2 for User 5', TRUE, CURRENT_TIME),
-    (5, 'Order 3 for User 5', FALSE, CURRENT_TIME),
-    (6, 'Order 1 for User 6', FALSE, CURRENT_TIME),
-    (7, 'Order 1 for User 7', FALSE, CURRENT_TIME),
-    (8, 'Order 1 for User 8', FALSE, CURRENT_TIME),
-    (9, 'Order 1 for User 9', TRUE, CURRENT_TIME),
-    (10, 'Order 1 for User 10', FALSE, CURRENT_TIME);
+    (2, 'Order 3 for User 2', FALSE, NOW()),
+    (3, 'Order 1 for User 3', TRUE, NOW()),
+    (3, 'Order 2 for User 3', TRUE, NOW()),
+    (3, 'Order 3 for User 3', FALSE, NOW()),
+    (4, 'Order 1 for User 4', FALSE, NOW()),
+    (4, 'Order 2 for User 4', FALSE, NOW()),
+    (4, 'Order 3 for User 4', FALSE, NOW()),
+    (5, 'Order 1 for User 5', TRUE, NOW()),
+    (5, 'Order 2 for User 5', TRUE, NOW()),
+    (5, 'Order 3 for User 5', FALSE, NOW()),
+    (6, 'Order 1 for User 6', FALSE, NOW()),
+    (7, 'Order 1 for User 7', FALSE, NOW()),
+    (8, 'Order 1 for User 8', FALSE, NOW()),
+    (9, 'Order 1 for User 9', TRUE, NOW()),
+    (10, 'Order 1 for User 10', FALSE, NOW());
 
 INSERT INTO sutk.step_names (name)
 VALUES
@@ -140,8 +143,14 @@ VALUES
     (6, 5, 1, '2024-03-26', '2024-03-27'),
     (4, 5, 2, '2024-03-27', '2024-03-28'),
     (9, 5, 3, '2024-03-28', NULL),
+
     (2, 6, 1, CURRENT_DATE, NULL),
-    (3, 7, 1, CURRENT_DATE, NULL),
+
+    (10, 7, 1, '2024-03-24', '2024-03-25'),
+    (1, 7, 2, '2024-03-25', '2024-03-26'),
+    (2, 7, 3, '2024-03-26', '2024-03-27'),
+    (3, 7, 4, '2024-03-27', NULL), -- Заказ в доставке и не доставлен
+
     (5, 8, 1, CURRENT_DATE, NULL),
     (8, 9, 1, CURRENT_DATE, NULL),
     (2, 10, 1, CURRENT_DATE, NULL),

@@ -30,8 +30,8 @@ DROP TABLE IF EXISTS sutk.addresses CASCADE;
 CREATE TABLE sutk.addresses (
     client_id INTEGER REFERENCES sutk.clients(id),
     address VARCHAR(200) NOT NULL,
-    from_date TIME DEFAULT CURRENT_TIME,
-    to_date TIME DEFAULT '5999-01-01 00:00:00'
+    from_date TIMESTAMP DEFAULT NOW(),
+    to_date TIMESTAMP DEFAULT '5999-01-01 00:00:00'
 );
 
 DROP TABLE IF EXISTS sutk.orders CASCADE;
@@ -40,7 +40,7 @@ CREATE TABLE sutk.orders (
     client_id INTEGER REFERENCES sutk.clients(id),
     description TEXT,
     delivery BOOLEAN NOT NULL,
-	order_date TIME DEFAULT CURRENT_TIME
+	order_date TIMESTAMP DEFAULT NOW()
 );
 
 DROP TABLE IF EXISTS sutk.step_names CASCADE;
