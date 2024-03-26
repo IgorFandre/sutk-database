@@ -84,7 +84,7 @@
 
 **addresses (адреса):**
    - `address`: обязательное поле
-   - `from_date`: по умолчанию CURRENT_TIME
+   - `from_date`: по умолчанию NOW()
    - `to_date`: по умолчанию 5999 год.
 
 **orders (заказы):**
