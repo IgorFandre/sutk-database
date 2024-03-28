@@ -110,7 +110,7 @@ VALUES
     (9, 'Order 1 for User 9', TRUE, NOW()),
     (10, 'Order 1 for User 10', FALSE, NOW());
 
-INSERT INTO sutk.step_names (name)
+INSERT INTO sutk.status_types (name)
 VALUES
     ('Проверка заказа'),
     ('Ожидание оплаты'),
@@ -118,7 +118,7 @@ VALUES
     ('Доставка'),
     ('Самовывоз');
 
-INSERT INTO sutk.steps (worker_id, order_id, step_id, from_date, to_date)
+INSERT INTO sutk.order_statuses (worker_id, order_id, status_id, from_date, to_date)
 VALUES
     (5, 1, 1, '2024-03-25', '2024-03-26'),
     (8, 1, 2, '2024-03-26', '2024-03-27'),

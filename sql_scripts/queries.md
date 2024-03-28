@@ -50,12 +50,12 @@ HAVING COUNT(ord.order_id) > (
 ```sql
 SELECT
     orders.order_id AS order_id,
-    names.name AS step,
-    steps.from_date AS start_date
-FROM sutk.steps AS steps
-JOIN sutk.orders AS orders ON steps.order_id = orders.order_id
+    types.name AS step,
+    order_statuses.from_date AS start_date
+FROM sutk.order_statuses AS order_statuses
+JOIN sutk.orders AS orders ON order_statuses.order_id = orders.order_id
 JOIN sutk.clients AS clients ON orders.client_id = clients.client_id
-JOIN sutk.step_names AS names ON steps.step_id = names.step_id
+JOIN sutk.status_types AS types ON order_statuses.status_id = types.status_id
 WHERE to_date IS NULL
     AND clients.client_id = 2;
 ```
@@ -66,14 +66,14 @@ WHERE to_date IS NULL
 SELECT
     orders.order_id AS order_id,
     addresses.address,
-    steps.from_date
-FROM sutk.steps AS steps
-JOIN sutk.orders AS orders ON steps.order_id = orders.order_id
+    order_statuses.from_date
+FROM sutk.order_statuses AS order_statuses
+JOIN sutk.orders AS orders ON order_statuses.order_id = orders.order_id
 JOIN sutk.addresses AS addresses ON orders.client_id = addresses.client_id
-WHERE steps.step_id = 4
-	AND steps.to_date IS NULL
+WHERE order_statuses.status_id = 4
+	AND order_statuses.to_date IS NULL
 	AND (orders.order_date BETWEEN addresses.from_date AND addresses.to_date)
-ORDER BY steps.from_date;
+ORDER BY order_statuses.from_date;
 ```
 
 ### Для каждого продукта узнать сколько осталось незабронированных штук на складе

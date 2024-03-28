@@ -43,20 +43,22 @@ CREATE TABLE sutk.orders (
 	order_date TIMESTAMP DEFAULT NOW()
 );
 
-DROP TABLE IF EXISTS sutk.step_names CASCADE;
-CREATE TABLE sutk.step_names (
-    step_id SERIAL PRIMARY KEY,
+DROP TABLE IF EXISTS sutk.status_types CASCADE;
+CREATE TABLE sutk.status_types (
+    status_id SERIAL PRIMARY KEY,
     name VARCHAR(15) NOT NULL
 );
 
-DROP TABLE IF EXISTS sutk.steps CASCADE;
-CREATE TABLE sutk.steps (
+DROP TABLE IF EXISTS sutk.order_statuses CASCADE;
+CREATE TABLE sutk.order_statuses (
+    order_status_id SERIAL PRIMARY KEY,
     worker_id INTEGER REFERENCES sutk.workers(worker_id),
     order_id INTEGER REFERENCES sutk.orders(order_id),
-    step_id INTEGER REFERENCES sutk.step_names(step_id),
+    status_id INTEGER REFERENCES sutk.status_types(status_id),
     from_date DATE DEFAULT CURRENT_DATE,
     to_date DATE,
-    CONSTRAINT step_combination UNIQUE (worker_id, order_id, step_id)
+    comment TEXT,
+    CONSTRAINT step_combination UNIQUE (worker_id, order_id, status_id)
 );
 
 DROP TABLE IF EXISTS sutk.products CASCADE;
