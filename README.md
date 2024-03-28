@@ -20,8 +20,8 @@
   - [Таблица: clients](#таблица-clients)
   - [Таблица: addresses](#таблица-addresses)
   - [Таблица: orders](#таблица-orders)
-  - [Таблица: step\_names](#таблица-step_names)
-  - [Таблица: steps](#таблица-steps)
+  - [Таблица: status\_types](#таблица-status_types)
+  - [Таблица: order\_statuses](#таблица-order_statuses)
   - [Таблица: products](#таблица-products)
   - [Таблица: ordered\_products](#таблица-ordered_products)
 - [Реализация базы данных](#реализация-базы-данных)
@@ -83,103 +83,93 @@
 ## Физическое проектирование
 
 ### Таблица: departments
-- `department_id`: SERIAL
-  - Primary Key
-- `name`: VARCHAR(50) 
-  - NOT NULL
-- `phone`: CHAR(16)
-  - phone LIKE '+7(\_ \_ \_)\_ \_ \_-\_ \_-\_ \_'
-- `email`: VARCHAR(50)
-  - email LIKE '%\_@\_ \_%.\_ \_%'
+
+| Название        | Описание              | Тип данных     | Ограничение               |
+|-----------------|-----------------------|----------------|---------------------------|
+| `department_id` | Идентификатор отдела  | `SERIAL`       | `PRIMARY KEY`             |
+| `name`          | Название отдела       | `VARCHAR(50)`  | `NOT NULL`                |
+| `phone`         | Телефон отдела        | `CHAR(16)`     | `LIKE '+7(___)___-__-__'` |
+| `email`         | Email отдела          | `VARCHAR(50)`  | `LIKE '%_@__%.__%'`       |
 
 ### Таблица: workers
-- `worker_id`: SERIAL
-  - **Primary Key**
-- `department_id`: INTEGER
-  - **Foreign Key** --> departments.department_id
-- `name`: VARCHAR(20)
-  - NOT NULL
-- `surname`: VARCHAR(20)
-  - NOT NULL
-- `middle_name`: VARCHAR(20)
+
+| Название       | Описание                     | Тип данных    | Ограничение   |
+|----------------|------------------------------|---------------|---------------|
+| `worker_id`    | Идентификатор работника      | `SERIAL`      | `PRIMARY KEY` |
+| `department_id`| Идентификатор отдела         | `INTEGER`     | `FOREIGN KEY` | 
+| `name`         | Имя работника                | `VARCHAR(20)` | `NOT NULL`    |
+| `surname`      | Фамилия работника            | `VARCHAR(20)` | `NOT NULL`    |
+| `middle_name`  | Отчество работника           | `VARCHAR(20)` | `-`           |
 
 ### Таблица: clients
-- `client_id`: SERIAL
-  - **Primary Key**
-- `worker_id`: INTEGER
-  - **Foreign Key** --> workers.worker_id
-- `company`: VARCHAR(50) 
-  - UNIQUE
-- `contact_name`: VARCHAR(65) 
-  - NOT NULL
-- `contact_phone`: CHAR(16)
-  - contact_phone LIKE '+7(\_ \_ \_)\_ \_ \_-\_ \_-\_ \_'
+
+| Название         | Описание                      | Тип данных   | Ограничение               |
+|------------------|-------------------------------|--------------|---------------------------|
+| `client_id`      | Идентификатор клиента         | `SERIAL`     | `PRIMARY KEY`             |
+| `worker_id`      | Идентификатор работника       | `INTEGER`    | `FOREIGN KEY`             |
+| `company`        | Название компании клиента     | `VARCHAR(50)`| `UNIQUE`                  |
+| `contact_name`   | Имя контактного лица клиента  | `VARCHAR(65)`| `NOT NULL`                |
+| `contact_phone`  | Телефон контактного лица      | `CHAR(16)`   | `LIKE '+7(___)___-__-__'` |
 
 ### Таблица: addresses
-- `client_id`: INTEGER 
-  - **Foreign Key** --> clients.client_id
-- `address`: VARCHAR(200)
-  - NOT NULL
-- `from_date`: TIMESTAMP
-  - DEFAULT NOW()
-- `to_date`: TIMESTAMP
-  - DEFAULT '5999-01-01 00:00:00'
+
+| Название       | Описание                      | Тип данных     | Ограничение                     |
+|----------------|-------------------------------|----------------|---------------------------------|
+| `client_id`    | Идентификатор клиента         | `INTEGER`      | `FOREIGN KEY`                   |
+| `address`      | Адрес клиента                 | `VARCHAR(200)` | `NOT NULL`                      |
+| `from_date`    | Дата начала действия адреса   | `TIMESTAMP`    | `DEFAULT NOW()`                 |
+| `to_date`      | Дата окончания действия адреса| `TIMESTAMP`    | `DEFAULT '5999-01-01 00:00:00'` |
 
 ### Таблица: orders
-- `order_id`: SERIAL
-  - **Primary Key**
-- `client_id`: INTEGER
-  - **Foreign Key** --> clients.client_id
-- `description`: TEXT
-- `delivery`: BOOLEAN 
-  - NOT NULL
-- `order_date`: TIMESTAMP 
-  - DEFAULT NOW()
 
-### Таблица: step_names
-- `step_id`: SERIAL
-  - **Primary Key**
-- `name`: VARCHAR(15)
-  - NOT NULL
+| Название       | Описание              | Тип данных     | Ограничение    |
+|----------------|-----------------------|----------------|----------------|
+| `order_id`     | Идентификатор заказа  | `SERIAL`       | `PRIMARY KEY`  |
+| `client_id`    | Идентификатор клиента | `INTEGER`      | `FOREIGN KEY`  |
+| `description`  | Описание заказа       | `TEXT`         |                |
+| `delivery`     | Доставка              | `BOOLEAN`      | `NOT NULL`     |
+| `order_date`   | Дата заказа           | `TIMESTAMP`    | `DEFAULT NOW()`|
 
-### Таблица: steps
-- `worker_id`: INTEGER
-  - **Foreign Key** --> workers.worker_id
-- `order_id`: INTEGER
-  - **Foreign Key** --> orders.order_id
-- `step_id`: INTEGER
-  - **Foreign Key** --> step_names.step_id
-- `from_date`: DATE
-  - DEFAULT CURRENT_DATE
-- `to_date`: DATE
-- CONSTRAINT `step_combination`: UNIQUE (worker_id, order_id, step_id)
+### Таблица: status_types
+
+| Название    | Описание              | Тип данных     | Ограничение   |
+|-------------|-----------------------|----------------|---------------|
+| `status_id` | Идентификатор статуса | `SERIAL`       | `PRIMARY KEY` |
+| `name`      | Название статуса      | `VARCHAR(15)`  | `NOT NULL`    |
+
+### Таблица: order_statuses
+
+| Название          | Описание                              | Тип данных     | Ограничение            |
+|-------------------|---------------------------------------|----------------|------------------------|
+| `order_status_id` | Идентификатор статуса заказа          | `SERIAL`       | `PRIMARY KEY`          |
+| `worker_id`       | Идентификатор работника               | `INTEGER`      | `FOREIGN KEY`          |
+| `order_id`        | Идентификатор заказа                  | `INTEGER`      | `FOREIGN KEY`          |
+| `status_id`       | Идентификатор статуса                 | `INTEGER`      | `FOREIGN KEY`          |
+| `from_date`       | Дата начала статуса                   | `DATE`         | `DEFAULT CURRENT_DATE` |
+| `to_date`         | Дата окончания статуса                | `DATE`         |                        |
+| `comment`         | Комментарий                           | `TEXT`         |                        |
+| `step_combination`| Комбинация `worker_id`, `order_id` и `status_id` для уникальности | | `UNIQUE`  |
 
 ### Таблица: products
-- `product_id`: SERIAL
-  - **Primary Key**
-- `name`: VARCHAR(50)
-  - NOT NULL
-- `quality`: VARCHAR(50)
-- `description`: TEXT
-- `price`: NUMERIC(10, 2)
-  - NOT NULL 
-  - price >= 0
-- `available`: INTEGER
-  - NOT NULL 
-  - available >= 0
-- `weight`: NUMERIC(10, 3)
-  - NOT NULL 
-  - weight >= 0
+
+| Название       | Описание                               | Тип данных        | Ограничение                |
+|----------------|----------------------------------------|-------------------|----------------------------|
+| `product_id`   | Идентификатор продукта                 | `SERIAL`          | `PRIMARY KEY`              |
+| `name`         | Название продукта                      | `VARCHAR(50)`     | `NOT NULL`                 |
+| `quality`      | Качество продукта                      | `VARCHAR(50)`     |                            |
+| `description`  | Описание продукта                      | `TEXT`            |                            |
+| `price`        | Цена продукта                          | `NUMERIC(10, 2)`  | `NOT NULL, price >= 0`     |
+| `available`    | Количество доступных продуктов         | `INTEGER`         | `NOT NULL, available >= 0` |
+| `weight`       | Вес продукта                           | `NUMERIC(10, 3)`  | `NOT NULL, weight >= 0`    |
 
 ### Таблица: ordered_products
-- `order_id`: INTEGER
-  - **Foreign Key** --> orders.order_id
-- `product_id`: INTEGER
-  - **Foreign Key** --> products.product_id
-- `count`: INTEGER
-  - NOT NULL 
-  - count > 0
-- CONSTRAINT `order_combination`: UNIQUE (order_id, product_id)
+
+| Название            | Описание                                              | Тип данных    | Ограничение           |
+|---------------------|-------------------------------------------------------|---------------|-----------------------|
+| `order_id`          | Идентификатор заказа                                  | `INTEGER`     | `FOREIGN KEY`         |
+| `product_id`        | Идентификатор продукта                                | `INTEGER`     | `FOREIGN KEY`         |
+| `count`             | Количество заказанных продуктов                       | `INTEGER`     | `NOT NULL, count > 0` |
+| `order_combination` | Комбинация `order_id` и `product_id` для уникальности |               | `UNIQUE`              |
 
 
 ## Реализация базы данных
