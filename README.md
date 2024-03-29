@@ -99,7 +99,7 @@
 | `department_id`| Идентификатор отдела         | `INTEGER`     | `FOREIGN KEY` | 
 | `name`         | Имя работника                | `VARCHAR(20)` | `NOT NULL`    |
 | `surname`      | Фамилия работника            | `VARCHAR(20)` | `NOT NULL`    |
-| `middle_name`  | Отчество работника           | `VARCHAR(20)` | `-`           |
+| `middle_name`  | Отчество работника           | `VARCHAR(20)` |               |
 
 ### Таблица: clients
 
