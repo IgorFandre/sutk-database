@@ -120,9 +120,14 @@ SELECT
     products.available - COALESCE(cl_products.not_available, 0) AS free
 FROM sutk.products AS products
 LEFT JOIN (
-    SELECT product_id, SUM(count) as not_available
-    FROM sutk.ordered_products
-    GROUP BY product_id
+    SELECT
+        ord_products.product_id,
+        SUM(ord_products.count) as not_available
+    FROM sutk.ordered_products AS ord_products
+    JOIN sutk.orders AS orders ON ord_products.order_id = orders.order_id
+    JOIN sutk.order_statuses AS statuses ON orders.order_id = statuses.order_id
+    WHERE statuses.to_date IS NULL
+    GROUP BY ord_products.product_id
 ) AS cl_products ON products.product_id = cl_products.product_id;
 ```
 
@@ -137,7 +142,7 @@ LEFT JOIN (
 |     5      | Проволока сварочная        | 100  |
 |     6      | Лист оцинкованный          |  43  |
 |     7      | Труба круглая              |  64  |
-|     8      | Швеллер гнутый             |  82  |
+|     8      | Швеллер гнутый             |  90  |
 |     9      | Полоса стальная            | 110  |
 |    10      | Арматура строительная      |  85  |
 |    11      | Труба прямоугольная        |  48  |
@@ -146,12 +151,12 @@ LEFT JOIN (
 |    14      | Труба электросварная       |  38  |
 |    15      | Полоса нержавеющая         |  84  |
 |    16      | Сталь круглая              |  60  |
-|    17      | Уголок гнутый              |  95  |
+|    17      | Уголок гнутый              | 100  |
 |    18      | Швеллер гнутый             |  80  |
 |    19      | Проволока горячекатаная    | 103  |
-|    20      | Стальной штампованный лист |  57  |
+|    20      | Стальной штампованный лист |  62  |
 |    21      | Труба спирально-навивная   |  42  |
-|    22      | Полоса оцинкованная        |  64  |
+|    22      | Полоса оцинкованная        |  76  |
 |    23      | Уголок широкополочный      |  85  |
 |    24      | Труба оцинкованная         |  40  |
 |    25      | Проволока нержавеющая      | 102  |
