@@ -228,7 +228,7 @@ WHERE cl.company = 'Смит и Ко.';
 
 #### Результат
 
-| worker_namec               | department_name   | phone               | email                 |
+| worker_name               | department_name   | phone               | email                 |
 |----------------------------|-------------------|---------------------|-----------------------|
 | "Елена Козлова Викторовна" | "Отдел поддержки" |	"+7(444)444-44-44" | "support@example.com" |
 
