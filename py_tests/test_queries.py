@@ -5,15 +5,15 @@ import json
 import pandas as pd
 import psycopg2
 import pytest
-import sqlalchemy
+import os
 
 load_dotenv()
 
-db_host='localhost'
-db_port=5432
-db_name='project'
-db_user='igor'
-db_password='FehtkbZ2004'
+db_name = 'project'
+db_user = os.environ.get("DB_USER")
+db_password = os.environ.get("DB_PASSWORD")
+db_host = os.environ.get("DB_HOST")
+db_port = os.environ.get("DB_PORT")
 
 with open('./py_tests/queries.json') as file:
     test_queries = json.load(file)
