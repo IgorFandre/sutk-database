@@ -1,3 +1,4 @@
+-- Обновляет адрес клиента и добавляет новую запись об адресе
 CREATE OR REPLACE PROCEDURE update_address(
     cl_id INTEGER,
     new_address VARCHAR(200),
@@ -16,7 +17,12 @@ END;
 $$
 LANGUAGE plpgsql;
 
-
+-- Удаляет всю информацию о клиенте из таблиц:
+-- - sutk.addresses
+-- - sutk.order_statuses
+-- - sutk.ordered_products
+-- - sutk.orders
+-- - sutk.clients
 CREATE OR REPLACE PROCEDURE delete_all_client_info(
     clear_client_id INTEGER
 )

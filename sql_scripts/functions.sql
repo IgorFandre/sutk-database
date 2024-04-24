@@ -1,4 +1,8 @@
--- Example of usage:
+-- Возвращает информацию о доставке заказа:
+-- - общий вес заказа
+-- - количество требуемых машин
+-- - стоимость доставки
+-- Пример использования:
 -- SELECT * FROM delivery_info(1, CAST(0.5 AS NUMERIC(10, 3)), CAST(1000 AS NUMERIC(10, 2)));
 CREATE OR REPLACE FUNCTION delivery_info(
     IN ord_id INTEGER,
@@ -39,7 +43,8 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Example of usage:
+-- Вычисляет общую стоимость заказа: стоимость продуктов + стоимость доставки (если есть)
+-- Пример использования:
 -- SELECT total_order_cost(9);
 CREATE OR REPLACE FUNCTION total_order_cost(
     IN ord_id INTEGER,
